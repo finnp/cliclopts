@@ -1,0 +1,22 @@
+{
+  "name": "cliclopts",
+  "version": "1.0.0",
+  "description": "Options parsing helper for minimist ?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finnp/cliclopts.git"
+  },
+  "keywords": [
+    "options"
+  ],
+  "author": "Finn Pauls",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/finnp/cliclopts/issues"
+  },
+  "homepage": "https://github.com/finnp/cliclopts"
+}
