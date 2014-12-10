@@ -1,7 +1,7 @@
 {
   "name": "cliclopts",
   "version": "1.0.0",
-  "description": "Options parsing helper for minimist ?",
+  "description": "Command line options helper and usage printer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,8 @@
     "url": "https://github.com/finnp/cliclopts.git"
   },
   "keywords": [
+    "cli",
+    "minimist",
     "options"
   ],
   "author": "Finn Pauls",
