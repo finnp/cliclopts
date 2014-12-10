@@ -1,12 +1,12 @@
 # cliclopts
 [![NPM](https://nodei.co/npm/cliclopts.png)](https://nodei.co/npm/cliclopts/)
 
-Commands line parsing, works well with `minimist`, inspired by `nomnom`
+Command line options helper and usage printer, works well with [minimist](https://www.npmjs.com/package/minimist), inspired by [nomnom](https://www.npmjs.com/package/nomnom)
 
 
 ## usage
 
-Define your options in an array:
+Define the allowed options in an array and pass it to 'cliclopts'
 
 ```js
 var cliclopts = require('cliclopts')
@@ -70,7 +70,8 @@ var allowedOptions = {
   {
     name: 'help',
     abbr: 'h',
-    help: 'show help'
+    help: 'show help',
+    boolean: true
   }
 }
 
@@ -78,7 +79,8 @@ var clopts = require('cliclopts')(allowedOptions)
 
 var argv = require('minimist')(process.argv.slice(2), {
   alias: clopts.alias(),
-  boolean: clopts.boolean()
+  boolean: clopts.boolean(),
+  default: clopts.default(),
 })
 
 if(minimist.help) {
