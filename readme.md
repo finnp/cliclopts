@@ -1,6 +1,8 @@
 # cliclopts
 [![NPM](https://nodei.co/npm/cliclopts.png)](https://nodei.co/npm/cliclopts/)
 
+![cliclopts](cliclopts.png)
+
 Command line options helper and usage printer, works well with [minimist](https://www.npmjs.com/package/minimist), inspired by [nomnom](https://www.npmjs.com/package/nomnom)
 
 
