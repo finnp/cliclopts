@@ -1,7 +1,7 @@
 var PassThrough = require('stream').PassThrough
 
 function Cliclopts(opts) {
-  if(!(this instanceof Cliclopts)) {
+  if (!(this instanceof Cliclopts)) {
     return new Cliclopts(opts)
   }
   this.opts = opts || []
@@ -11,39 +11,43 @@ function Cliclopts(opts) {
 
 Cliclopts.prototype.print = function (stream) {
   var output = stream || process.stdout
+  output.write(this.usage())
+}
+
+Cliclopts.prototype.usage = function () {
+  var output = ""
   this.opts.filter(function (opt) {
-      return opt.help
+    return opt.help
   })
   .forEach(function (option) {
-    output.write(this.indent)  
-    
-    var helpIndex = option.helpIndex
-    
+    output += this.indent
 
-    if(!helpIndex) {
+    var helpIndex = option.helpIndex
+
+    if (!helpIndex) {
       helpIndex = '--' + option.name
-      if(option.abbr) helpIndex += ', -' + option.abbr
-    }  
-    output.write(helpIndex)
+      if (option.abbr) helpIndex += ', -' + option.abbr
+    }
+    output += helpIndex
 
     var offset = 0
-    if(helpIndex.length > this.width) {
-      output.write('\n' + this.indent)
+    if (helpIndex.length > this.width) {
+      output += '\n' + this.indent
     } else {
       offset = helpIndex.length
     }
 
-    output.write(Array(this.width - offset).join(' '))
-  
-    output.write(option.help)
-    if(option.hasOwnProperty('default')) {
-      output.write(' (default: ' + JSON.stringify(option.default) +')')
+    output += Array(this.width - offset).join(' ')
+
+    output += option.help
+    if (option.hasOwnProperty('default')) {
+      output += ' (default: ' + JSON.stringify(option.default) +')'
     }
-    output.write('\n')
+    output += '\n'
   }.bind(this))
 
+  return output
 }
-
 
 Cliclopts.prototype.booleans = function () {
   return this.opts
@@ -54,31 +58,41 @@ Cliclopts.prototype.booleans = function () {
       return opt.name
     })
 }
+
 Cliclopts.prototype.boolean = Cliclopts.prototype.booleans
 
 Cliclopts.prototype.default = function () {
   var defaults = {}
   this.opts.forEach(function (opt) {
-    if('default' in opt) {
+    if ('default' in opt) {
       defaults[opt.name] = opt.default
-      if('abbr' in opt) defaults[opt.abbr] = opt.default
+      if ('abbr' in opt) defaults[opt.abbr] = opt.default
     }
   })
   return defaults
 }
 
-Cliclopts.prototype.alias =function () {
+Cliclopts.prototype.alias = function () {
   var alias = {}
   this.opts.forEach(function (opt) {
     var build = []
-    if('alias' in opt) {
-      if(typeof opt.alias === 'string') build.push(opt.alias)
+    if ('alias' in opt) {
+      if (typeof opt.alias === 'string') build.push(opt.alias)
       else build = build.concat(opt.alias)
     }
-    if('abbr' in opt) build.push(opt.abbr)
+    if ('abbr' in opt) build.push(opt.abbr)
     alias[opt.name] = build
   })
   return alias
 }
+
+Cliclopts.prototype.options = function () {
+  return {
+    alias: this.alias(),
+    boolean: this.boolean(),
+    default: this.default()
+  }
+}
+
 
 module.exports = Cliclopts
