@@ -1,6 +1,6 @@
 {
   "name": "cliclopts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Command line options helper and usage printer",
   "main": "index.js",
   "scripts": {
