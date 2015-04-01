@@ -31,15 +31,18 @@ var options = [
 
 var cliOpts = cliclopts(options)
 ```
+### cliOpts.usage()
 
-### cliOpts.print()
-
-Print help information, in this example:
+Returns the usage information as string:
 
 ```
 --verbose, -v         be verbose
 --path, -p            path to file (default: "dat.json")
 ```
+
+### cliOpts.print()
+
+Prints the usage information.
 
 ### cliOpts.boolean()
 
@@ -52,6 +55,17 @@ Returns Object with command names as keys and alias list as value (including abb
 ### cliOpts.default()
 
 Returns Object with command names as keys and default values as values.
+
+### cliOpts.options()
+
+Returns
+```js
+{
+  alias: cliOpts.alias(),
+  boolean: cliOpts.boolean(),
+  default: cliOpts.default()
+}
+```
 
 
 ## Example usage with `minimist`
