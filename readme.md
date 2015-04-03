@@ -70,10 +70,10 @@ Returns
 
 ## Example usage with `minimist`
 ```js
-var allowedOptions = {
+var allowedOptions = [
   {
     name: 'verbose',
-    abbr: 'v'
+    abbr: 'v',
     alias: ['cry-at-me'],
     boolean: true,
     help: 'be verbose'
@@ -89,17 +89,17 @@ var allowedOptions = {
     help: 'show help',
     boolean: true
   }
-}
+]
 
 var clopts = require('cliclopts')(allowedOptions)
 
 var argv = require('minimist')(process.argv.slice(2), {
   alias: clopts.alias(),
   boolean: clopts.boolean(),
-  default: clopts.default(),
+  default: clopts.default()
 })
 
-if(minimist.help) {
+if (argv.help) {
   console.log('Usage: command [options]')
   clopts.print()
   process.exit()
