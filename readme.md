@@ -32,6 +32,18 @@ var options = [
 
 var cliOpts = cliclopts(options)
 ```
+### cliclopts(options)
+
+options is an array of objects with the following possible keys:
+
+* `name` primary name of option
+* `abbr` one character alias of the option
+* `alias` other options treated as alias
+* `boolean` if true the option is seen as a boolean flag
+* `help` usage string for the option
+* `default` default value of the option
+
+
 ### cliOpts.usage()
 
 Returns the usage information as string:
