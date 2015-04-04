@@ -1,5 +1,3 @@
-var PassThrough = require('stream').PassThrough
-
 function Cliclopts(opts) {
   if (!(this instanceof Cliclopts)) {
     return new Cliclopts(opts)
@@ -26,7 +24,7 @@ Cliclopts.prototype.usage = function () {
 
     if (!helpIndex) {
       helpIndex = '--' + option.name
-      if (option.abbr) helpIndex += ', -' + option.abbr
+      if (option.alias) helpIndex += ', -' + option.alias
     }
     output += helpIndex
 
@@ -66,7 +64,7 @@ Cliclopts.prototype.default = function () {
   this.opts.forEach(function (opt) {
     if ('default' in opt) {
       defaults[opt.name] = opt.default
-      if ('abbr' in opt) defaults[opt.abbr] = opt.default
+      if ('alias' in opt) defaults[opt.alias] = opt.default
     }
   })
   return defaults
@@ -80,7 +78,7 @@ Cliclopts.prototype.alias = function () {
       if (typeof opt.alias === 'string') build.push(opt.alias)
       else build = build.concat(opt.alias)
     }
-    if ('abbr' in opt) build.push(opt.abbr)
+    if ('alias' in opt) build.push(opt.alias)
     alias[opt.name] = build
   })
   return alias
