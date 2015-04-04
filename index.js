@@ -1,6 +1,4 @@
-var PassThrough = require('stream').PassThrough
-
-function Cliclopts(opts) {
+function Cliclopts (opts) {
   if (!(this instanceof Cliclopts)) {
     return new Cliclopts(opts)
   }
@@ -15,36 +13,38 @@ Cliclopts.prototype.print = function (stream) {
 }
 
 Cliclopts.prototype.usage = function () {
-  var output = ""
-  this.opts.filter(function (opt) {
-    return opt.help
-  })
-  .forEach(function (option) {
-    output += this.indent
+  var output = ''
 
-    var helpIndex = option.helpIndex
+  this.opts
+    .filter(function (opt) {
+      return opt.help
+    })
+    .forEach(function (option) {
+      output += this.indent
 
-    if (!helpIndex) {
-      helpIndex = '--' + option.name
-      if (option.abbr) helpIndex += ', -' + option.abbr
-    }
-    output += helpIndex
+      var helpIndex = option.helpIndex
 
-    var offset = 0
-    if (helpIndex.length > this.width) {
-      output += '\n' + this.indent
-    } else {
-      offset = helpIndex.length
-    }
+      if (!helpIndex) {
+        helpIndex = '--' + option.name
+        if (option.abbr) helpIndex += ', -' + option.abbr
+      }
+      output += helpIndex
 
-    output += Array(this.width - offset).join(' ')
+      var offset = 0
+      if (helpIndex.length > this.width) {
+        output += '\n' + this.indent
+      } else {
+        offset = helpIndex.length
+      }
 
-    output += option.help
-    if (option.hasOwnProperty('default')) {
-      output += ' (default: ' + JSON.stringify(option.default) +')'
-    }
-    output += '\n'
-  }.bind(this))
+      output += Array(this.width - offset).join(' ')
+
+      output += option.help
+      if (option.hasOwnProperty('default')) {
+        output += ' (default: ' + JSON.stringify(option.default) + ')'
+      }
+      output += '\n'
+    }.bind(this))
 
   return output
 }
@@ -93,6 +93,5 @@ Cliclopts.prototype.options = function () {
     default: this.default()
   }
 }
-
 
 module.exports = Cliclopts

@@ -5,6 +5,7 @@
 
 Command line options helper and usage printer, works well with [minimist](https://www.npmjs.com/package/minimist), inspired by [nomnom](https://www.npmjs.com/package/nomnom)
 
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 ## usage
 
