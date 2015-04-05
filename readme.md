@@ -17,7 +17,7 @@ var cliclopts = require('cliclopts')
 var options = [
   {
     name: 'verbose',
-    abbr: 'v'
+    abbr: 'v',
     alias: ['loud'],
     boolean: true,
     help: 'be verbose'
@@ -25,7 +25,7 @@ var options = [
   {
     name: 'path',
     abbr: 'p',
-    default: './dat.json'
+    default: './dat.json',
     help: 'path to file'
   }
 ]
@@ -104,17 +104,13 @@ var allowedOptions = [
   }
 ]
 
-var clopts = require('cliclopts')(allowedOptions)
+var cliOpts = require('cliclopts')(allowedOptions)
 
-var argv = require('minimist')(process.argv.slice(2), {
-  alias: clopts.alias(),
-  boolean: clopts.boolean(),
-  default: clopts.default()
-})
+var argv = require('minimist')(process.argv.slice(2), cliOpts.options())
 
 if (argv.help) {
   console.log('Usage: command [options]')
-  clopts.print()
+  cliOpts.print()
   process.exit()
 }
 
